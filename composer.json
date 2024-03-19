@@ -15,7 +15,7 @@
     "ext-curl": "*",
     "ext-pdo_mysql": "*"
   },
-
+  "license":"mit",
   "autoload": {
     "psr-4": {
       "vring\\": "src/"
