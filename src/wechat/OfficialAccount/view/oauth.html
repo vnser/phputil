@@ -21,7 +21,7 @@
     // $.showLoading("授权登录中...");
     // alert(`{:input('get.login-page')}?openid={$openid}`)
     wx.miniProgram["<?=$_GET['get.type']??'redirectTo'?>"]({
-        url: `<?=$_GET['login-page'];?>?wechat_openid=<?=$wechat_openid;?>`
+        url: `<?=$_GET['login-page'];?>?wechat_openid=<?=$wechat_openid;?>&<?=http_build_query($_GET)?>`
     });
 </script>
 </body>
