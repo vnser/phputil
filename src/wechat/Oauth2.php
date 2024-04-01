@@ -29,9 +29,10 @@ class Oauth2
             return $auth_user;
         }
         if (!isset($_GET['code'])){
-            $app->oauth->scopes([$scopes])
+            $rep = $app->oauth->scopes([$scopes])
 //                ->setRequest($request)
                 ->redirect();
+            print_r($rep);
 //            header('location: '.$aUrl);
             exit;
         }
