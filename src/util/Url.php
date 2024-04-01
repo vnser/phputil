@@ -43,12 +43,14 @@ class Url
 
     /**
      * @param array $param
-     * @param string $pathInfo
      * @param bool $marge_get_param
+     * @param string $pathInfo
+     * @param bool $domain
      * @return string
      */
-    public function url($param = [],  $marge_get_param = true,$pathInfo = '')
+    public function url($param = [],  $marge_get_param = true,$pathInfo = '',$domain = false)
     {
+        $currentURL = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
         if (!empty($param) and is_string($param)) {
             parse_str($param, $param);
@@ -62,6 +64,10 @@ class Url
         if ($param) {
             $appUrl .= '?' . http_build_query($param);
         }
+        if ($domain){
+            $appUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://".$appUrl;
+        }
+
         return $appUrl;
 
     }

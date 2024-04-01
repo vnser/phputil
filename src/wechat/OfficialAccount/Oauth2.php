@@ -30,6 +30,9 @@ class Oauth2
         if ($auth_user){
             return $auth_user;
         }
+        if (!$url){
+            $url = Url::instance()->url([],true,'',true);
+        }
         if (!isset($_GET['code'])){
             $app->oauth->scopes([$scopes])
 //                ->setRequest($request)
@@ -44,10 +47,29 @@ class Oauth2
             /*  if (isset($_GET['userinfo'])){
                   $_GET['userinfo'] = json_decode(base64_decode($_GET['userinfo']),true);
               }*/
-            $user = $app->oauth->user();
+            $user = $app->oauth->user()->toArray();
             $_SESSION["wechat_user"] = $user;
             return $user;
         }
         throw new \Exception("授权异常，".Url::instance()->url());
+    }
+
+    /**
+     * @param Application $app
+     * @param string $url
+     * @param string $scopes
+     * @return void
+     * @throws \Exception
+     */
+    static public function mpJump(Application $app,callable $doneBack = null,string $url = '', string $scopes = 'snsapi_userinfo')
+    {
+
+        $user = self::oauth2($app,$url,$scopes);
+        if ($user){
+            $wechat_openid = $user['id'];
+            $doneBack($user);
+            require __DIR__.'/view/oauth.html';
+            exit;
+        }
     }
 }
