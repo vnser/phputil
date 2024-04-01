@@ -59,13 +59,18 @@ class Url
         if (($marge_get_param)) {
             $param = array_merge($_GET, $param);
         }
-
+//        print_r($_SERVER);
+        if (!$pathInfo){
+            $pathInfo = $_SERVER['PATH_INFO'];
+        }
         $appUrl = $this->isUrlEntrance ? $this->entranceUrl .  $pathInfo : ($this->webRoot  . $pathInfo);
         if ($param) {
             $appUrl .= '?' . http_build_query($param);
         }
         if ($domain){
-            $appUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://".$appUrl;
+//            var_dump($domain);
+            $appUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://".$_SERVER["HTTP_HOST"].$appUrl;
+
         }
 
         return $appUrl;
