@@ -20,8 +20,8 @@
 <script>
     // $.showLoading("授权登录中...");
     // alert(`{:input('get.login-page')}?openid={$openid}`)
-    wx.miniProgram["{:input('get.type','redirectTo')}"]({
-        url: `{:input('get.login-page')}?wechat_openid=<?=$wechat_openid;?>`
+    wx.miniProgram["<?=$_GET['get.type']??'redirectTo'?>"]({
+        url: `<?=$_GET['login-page'];?>?wechat_openid=<?=$wechat_openid;?>`
     });
 </script>
 </body>
