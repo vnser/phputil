@@ -13,12 +13,18 @@
     "php": ">=7.2.0,<=7.4.9",
     "ext-pdo": "*",
     "ext-curl": "*",
-    "ext-pdo_mysql": "*"
+    "ext-pdo_mysql": "*",
+    "w7corp/easywechat": "^4.9"
   },
   "license":"Apache-2.0",
   "autoload": {
     "psr-4": {
       "vring\\": "src/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "easywechat-composer/easywechat-composer": true
     }
   }
 }
