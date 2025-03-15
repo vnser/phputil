@@ -54,7 +54,7 @@ class WebPath
         if (strpos($url, $currentDomain) === 0) {
             $relativePath = substr($url, strlen($currentDomain));
         } else {
-            return $url; // 如果 URL 不属于当前站点，返回 false
+            $relativePath = $url; // 如果 URL 不属于当前站点，返回 false
         }
         // 拼接服务器物理路径
         $physicalPath = $documentRoot . $relativePath;
