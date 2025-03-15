@@ -33,6 +33,34 @@ class WebPath
         return str_replace($web_root, '', self::webTransform($real_path));
     }
 
+
+    /**
+     * 网站路径转物理路径
+     * @param string $url 资源URL
+     * @param null|string $currentDomain 域名包含https://
+     * @return false|string
+     */
+    static public function webPathToPhysical($url,$currentDomain = null) {
+
+
+        // 获取网站根目录
+        $documentRoot = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
+
+        if (!$currentDomain){
+            // 获取当前域名
+            $currentDomain = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://{$_SERVER['HTTP_HOST']}";
+        }
+        // 去掉 URL 中的域名部分
+        if (strpos($url, $currentDomain) === 0) {
+            $relativePath = substr($url, strlen($currentDomain));
+        } else {
+            return false; // 如果 URL 不属于当前站点，返回 false
+        }
+        // 拼接服务器物理路径
+        $physicalPath = $documentRoot . $relativePath;
+        return $physicalPath;
+    }
+
     /**
      * 取得网站根路径
      * @return string
