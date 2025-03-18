@@ -17,7 +17,9 @@ class AliBankCardTest extends TestCase
     public function testbank()
     {
         $alic = new AliBankCard();
-        $alic->getBinkType('6214832018989180');
+        $res = $alic->getBinkType('6214832018989180');
+
+        print_r($res);
     }
 
     public function testa()
