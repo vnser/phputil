@@ -1,13 +1,13 @@
 <?php
 
-namespace vring\fastadmin\webhook;
+namespace vring\webhook;
 class Git
 {
     const SERVER_NAME = 'server';
     const SERVER_EMAIL = 'server@example.com';
 
     //webhook脚本
-    static public function gitlab($username, $password, $repository, $pullbranch,$home)
+    static public function pushEventPull($username, $password, $repository, $pullbranch,$home)
     {
         /*  $username = \think\Env::get('webhook.username');
           $password = \think\Env::get('webhook.password');
