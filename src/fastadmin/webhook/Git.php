@@ -7,7 +7,7 @@ class Git
     const SERVER_EMAIL = 'server@example.com';
 
     //webhook脚本
-    static public function gitlab($username, $password, $repository, $pullbranch)
+    static public function gitlab($username, $password, $repository, $pullbranch,$home)
     {
         /*  $username = \think\Env::get('webhook.username');
           $password = \think\Env::get('webhook.password');
@@ -17,7 +17,7 @@ class Git
         $repository = "{$a['scheme']}://{$username}:{$password}@{$a['host']}" . ($a['port'] ? ":{$a['port']}" : '') . $a['path'];
         $env = array_merge($_ENV, [
             'GIT_TERMINAL_PROMPT' => 0,
-            'HOME' => ROOT_PATH
+            'HOME' => $home
         ]);
         print_r(self::runCommand('git config --global user.email "' . self::SERVER_EMAIL . '" && git config --global user.name "' . self::SERVER_NAME . '"', [], null, $env));
         print_r(self::runCommand('git pull ' . $repository . " {$pullbranch}", [], null, $env));
