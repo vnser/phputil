@@ -7,19 +7,19 @@
 
 namespace vring\wechat\OfficialAccount;
 
-use EasyWeChat\OfficialAccount\Application;
+//use EasyWeChat\OfficialAccount\Application;
 use vring\util\Url;
 
 class Oauth2
 {
     /**
-     * @param Application $app
+     * @param EasyWeChat\OfficialAccount\Application $app
      * @param string $url 获取到openid后的跳转url，如果有带参数，可先对整个url做下urlencode编码
      * @param string $scopes
      * @return array|void
      * @throws \Exception
      */
-    static public function oauth2(Application $app,string $url,string $scopes = 'snsapi_userinfo')
+    static public function oauth2( $app,string $url,string $scopes = 'snsapi_userinfo')
     {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();

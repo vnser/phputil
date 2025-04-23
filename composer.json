@@ -15,7 +15,6 @@
     "ext-pdo": "*",
     "ext-curl": "*",
     "ext-pdo_mysql": "*",
-    "overtrue/wechat": "~5.0",
     "ext-json": "*"
   },
   "license":"Apache-2.0",
@@ -25,9 +24,7 @@
     }
   },
   "config": {
-    "allow-plugins": {
-      "easywechat-composer/easywechat-composer": true
-    }
+
   },
   "require-dev": {
     "phpunit/phpunit": "*"
