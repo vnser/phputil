@@ -55,13 +55,14 @@ class Oauth2
     }
 
     /**
-     * @param Application $app
+     * 需要安装 "overtrue/wechat": "~5.0",
+     * @param EasyWeChat\OfficialAccount\Application $app
      * @param string $url
      * @param string $scopes
      * @return void
      * @throws \Exception
      */
-    static public function mpJump(Application $app,callable $doneBack = null,string $url = '', string $scopes = 'snsapi_userinfo')
+    static public function mpJump( $app,callable $doneBack = null,string $url = '', string $scopes = 'snsapi_userinfo')
     {
 
         $user = self::oauth2($app,$url,$scopes);
