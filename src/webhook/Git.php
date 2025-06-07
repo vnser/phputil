@@ -14,7 +14,7 @@ class Git
           $repository = \think\Env::get('webhook.repository');
           $pullbranch = \think\Env::get('webhook.pullbranch');*/
         $a = parse_url($repository);
-        $repository = "{$a['scheme']}://{$username}:{$password}@{$a['host']}" . ($a['port'] ? ":{$a['port']}" : '') . $a['path'];
+        $repository = "{$a['scheme']}://{$username}:{$password}@{$a['host']}" . (isset($a['port']) ? ":{$a['port']}" : '') . $a['path'];
         $env = array_merge($_ENV, [
             'GIT_TERMINAL_PROMPT' => 0,
             'HOME' => $home
