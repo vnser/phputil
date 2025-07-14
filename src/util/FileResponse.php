@@ -64,7 +64,7 @@ class FileResponse
 
     protected function getRequestRange()
     {
-        $range = $_SERVER['HTTP_RANGE'];
+        $range = $_SERVER['HTTP_RANGE'] ?? '';
         $max_range = $this->fileSize - 1;
         $range_byte = 0;
         $range_byte_end = $max_range;
