@@ -138,7 +138,7 @@ abstract class Build
                             }
 
                         }
-                        $call = $mv[1];
+                        $call = $mv[1] ?? '';
                         if (is_callable($call)) {
 //                                $csv[] = $call($item);
                             $csv[] = $call($item, $match,$v);

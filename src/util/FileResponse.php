@@ -55,7 +55,7 @@ class FileResponse
             if ($tell_length < $this->readSize) {
                 $readLength = $tell_length;
             }
-            ob_clean();
+//            ob_clean();
             echo fread($this->fp, $readLength);
             ob_flush();
 //            flush();
