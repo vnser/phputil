@@ -1232,7 +1232,7 @@ class PHPExcel_Calculation_Functions {
 		if (count($sumArgs) == 0) {
 			$sumArgs = $aArgs;
 		}
-		if (!in_array($condition{0},array('>', '<', '='))) {
+		if (!in_array($condition[0],array('>', '<', '='))) {
 			if (!is_numeric($condition)) { $condition = PHPExcel_Calculation::_wrapResult(strtoupper($condition)); }
 			$condition = '='.$condition;
 		} else {
