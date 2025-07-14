@@ -41,7 +41,9 @@ class FileResponse
         header('Content-Type: application/octet-stream');
         header('Accept-Ranges:bytes');
         header('Content-Length: ' . $conLength);
-        while (ob_end_flush()){};
+        while (ob_get_level() > 0) {
+            ob_end_flush();
+        }
         $readLength = $this->readSize;
         $end_tell = $range_byte_end + 1;
         while (true) {
