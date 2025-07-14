@@ -249,13 +249,13 @@ class PHPExcel_Reader_SYLK implements PHPExcel_Reader_IReader
 		$rowData = array();
 		$column = $row = '';
 		while (($rowData = fgets($fileHandle)) !== FALSE) {
-			$rowData = explode("\t",str_replace('¤',';',str_replace(';',"\t",str_replace(';;','¤',rtrim($rowData)))));
+			$rowData = explode("\t",str_replace('ï¿½',';',str_replace(';',"\t",str_replace(';;','ï¿½',rtrim($rowData)))));
 			$dataType = array_shift($rowData);
 			//	Read shared styles
 			if ($dataType == 'P') {
 				$formatArray = array();
 				foreach($rowData as $rowDatum) {
-					switch($rowDatum{0}) {
+					switch($rowDatum[0]) {
 						case 'P' :	$formatArray['numberformat']['code'] = str_replace($fromFormats,$toFormats,substr($rowDatum,1));
 									break;
 						case 'E' :
@@ -289,7 +289,7 @@ class PHPExcel_Reader_SYLK implements PHPExcel_Reader_IReader
 				$hasCalculatedValue = false;
 				$cellData = $cellDataFormula = '';
 				foreach($rowData as $rowDatum) {
-					switch($rowDatum{0}) {
+					switch($rowDatum[0]) {
 						case 'C' :
 						case 'X' :	$column = substr($rowDatum,1);
 									break;
@@ -316,12 +316,12 @@ class PHPExcel_Reader_SYLK implements PHPExcel_Reader_IReader
 												//	Empty R reference is the current row
 												if ($rowReference == '') $rowReference = $row;
 												//	Bracketed R references are relative to the current row
-												if ($rowReference{0} == '[') $rowReference = $row + trim($rowReference,'[]');
+												if ($rowReference[0] == '[') $rowReference = $row + trim($rowReference,'[]');
 												$columnReference = $cellReference[4][0];
 												//	Empty C reference is the current column
 												if ($columnReference == '') $columnReference = $column;
 												//	Bracketed C references are relative to the current column
-												if ($columnReference{0} == '[') $columnReference = $column + trim($columnReference,'[]');
+												if ($columnReference[0] == '[') $columnReference = $column + trim($columnReference,'[]');
 												$A1CellReference = PHPExcel_Cell::stringFromColumnIndex($columnReference-1).$rowReference;
 
 												$value = substr_replace($value,$A1CellReference,$cellReference[0][1],strlen($cellReference[0][0]));
@@ -348,7 +348,7 @@ class PHPExcel_Reader_SYLK implements PHPExcel_Reader_IReader
 				$formatStyle = $columnWidth = $styleSettings = '';
 				$styleData = array();
 				foreach($rowData as $rowDatum) {
-					switch($rowDatum{0}) {
+					switch($rowDatum[0]) {
 						case 'C' :
 						case 'X' :	$column = substr($rowDatum,1);
 									break;
@@ -402,7 +402,7 @@ class PHPExcel_Reader_SYLK implements PHPExcel_Reader_IReader
 				}
 			} else {
 				foreach($rowData as $rowDatum) {
-					switch($rowDatum{0}) {
+					switch($rowDatum[0]) {
 						case 'C' :
 						case 'X' :	$column = substr($rowDatum,1);
 									break;
