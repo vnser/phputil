@@ -556,7 +556,7 @@ class PHPExcel_Calculation_Functions {
 	 *	ATAN2
 	 *
 	 *	This function calculates the arc tangent of the two variables x and y. It is similar to
-	 *		calculating the arc tangent of y ÷ x, except that the signs of both arguments are used
+	 *		calculating the arc tangent of y ï¿½ x, except that the signs of both arguments are used
 	 *		to determine the quadrant of the result.
 	 *	The arctangent is the angle from the x-axis to a line containing the origin (0, 0) and a
 	 *		point with coordinates (xCoordinate, yCoordinate). The angle is given in radians between
@@ -1185,7 +1185,7 @@ class PHPExcel_Calculation_Functions {
 
 		$aArgs = self::flattenArray($aArgs);
 		$condition	= self::flattenSingleValue($condition);
-		if (!in_array($condition{0},array('>', '<', '='))) {
+		if (!in_array($condition[0],array('>', '<', '='))) {
 			if (!is_numeric($condition)) { $condition = PHPExcel_Calculation::_wrapResult(strtoupper($condition)); }
 			$condition = '='.$condition;
 		} else {
