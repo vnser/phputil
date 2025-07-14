@@ -7,12 +7,12 @@
  */
 
 namespace vring\excel;
-//require_once LIBRARY_PATH . '/phpexcel/PHPExcel.php';
-//require_once LIBRARY_PATH . '/phpexcel/PHPExcel/Reader/Excel5.php';
-//require_once LIBRARY_PATH . '/phpexcel/PHPExcel/Reader/Excel2007.php';
-//require_once LIBRARY_PATH . '/phpexcel/PHPExcel/Writer/Excel5.php';
-//require_once LIBRARY_PATH . '/phpexcel/PHPExcel/Writer/Excel2007.php';
-//require_once LIBRARY_PATH . '/phpexcel/PHPExcel/Writer/Excel5.php';
+require_once  '../../lib/phpexcel/PHPExcel.php';
+require_once  '../../lib/phpexcel/PHPExcel/Reader/Excel5.php';
+require_once  '../../lib/phpexcel/PHPExcel/Reader/Excel2007.php';
+require_once  '../../lib/phpexcel/PHPExcel/Writer/Excel5.php';
+require_once  '../../lib/phpexcel/PHPExcel/Writer/Excel2007.php';
+require_once  '../../lib/phpexcel/PHPExcel/Writer/Excel5.php';
 
 use PHPExcel_Cell_DataType;
 use PHPExcel_Reader_Excel2007;

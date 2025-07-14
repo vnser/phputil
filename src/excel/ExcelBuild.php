@@ -14,12 +14,12 @@ use PHPExcel_Style_Border;
 use PHPExcel_Worksheet;
 use PHPExcel_Writer_Excel2007;
 
-//require_once LIBRARY_PATH . '/phpexcel/PHPExcel.php';
-//require_once LIBRARY_PATH . '/phpexcel/PHPExcel/Reader/Excel5.php';
-//require_once LIBRARY_PATH . '/phpexcel/PHPExcel/Reader/Excel2007.php';
-//require_once LIBRARY_PATH . '/phpexcel/PHPExcel/Writer/Excel5.php';
-//require_once LIBRARY_PATH . '/phpexcel/PHPExcel/Writer/Excel2007.php';
-//require_once LIBRARY_PATH . '/phpexcel/PHPExcel/Writer/Excel5.php';
+require_once '../../lib/phpexcel/PHPExcel.php';
+require_once '../../lib/phpexcel/PHPExcel/Reader/Excel5.php';
+require_once '../../lib/phpexcel/PHPExcel/Reader/Excel2007.php';
+require_once '../../lib/phpexcel/PHPExcel/Writer/Excel5.php';
+require_once '../../lib/phpexcel/PHPExcel/Writer/Excel2007.php';
+require_once '../../lib/phpexcel/PHPExcel/Writer/Excel5.php';
 
 class ExcelBuild extends Build
 {
