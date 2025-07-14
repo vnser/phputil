@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Administrator
+ * User: vring
  * Date: 2022/7/15 0015
  * Time: 19:21
  */
@@ -14,6 +14,7 @@ require_once LIBRARY_PATH . '/phpexcel/PHPExcel/Writer/Excel5.php';
 require_once LIBRARY_PATH . '/phpexcel/PHPExcel/Writer/Excel2007.php';
 require_once LIBRARY_PATH . '/phpexcel/PHPExcel/Writer/Excel5.php';
 
+use PHPExcel_Cell_DataType;
 use PHPExcel_Reader_Excel2007;
 use PHPExcel_Reader_Excel5;
 
@@ -78,11 +79,30 @@ class ExcelReader extends Reader
      */
     protected function loadData()
     {
+        $sheet = null;
         if ($this->sheetName){
-            $this->data = $this->excel->getSheetByName($this->sheetName)->toArray();
+            $sheet = $this->excel->getSheetByName($this->sheetName);
+//            $this->data = $this->excel->getSheetByName($this->sheetName)->toArray(null,false);
         }else{
-            $this->data =  $this->excel->getSheet()->toArray();
+            $sheet =  $this->excel->getSheet();
+            /*$this->data =  $this->excel->getSheet()->toArray(null,false);
+            print_r($this->data);*/
         }
+        $this->data = [];
+        $sheetIterator = $sheet->getRowIterator();
+        foreach ($sheetIterator as $rk=>$item){
+            foreach ($item->getCellIterator() as $ck=>$cell){
+                if($cell->getDataType() === PHPExcel_Cell_DataType::TYPE_FORMULA){
+                    throw new \Exception("检测到表格中有公式，请去掉公式再导入！");
+                }
+//                /*$this->data[$rk][] =*/ $cell->getValue();
+            }
+
+        }
+
+        $this->data = $sheet->toArray(null,false);
+//        print_r($this->data);
+
     }
 
 

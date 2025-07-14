@@ -82,14 +82,15 @@ abstract class Reader
             if ($data === false) {
                 continue;
             }
+//            print_r($data);
             $data = $this->dataDecode($data);
             $data = $this->parseData($data, $onlyReadConcern);
             if ($data === false) {
                 continue;
             }
-
             yield $data;
         }
+//        print_r($this->concern);
         return $this->readCount;
     }
 
@@ -134,6 +135,7 @@ abstract class Reader
             foreach ($this->headParseConcern as $v) {
                 list($search, $key_name) = $v;
                 $this->eachData($data, function ($item, $key) use ($search, $key_name) {
+
                     if (strpos(Str::removeSpace($item), $search) !== false) {
                         $this->concern[$key] = $key_name;
                     }
@@ -162,6 +164,7 @@ abstract class Reader
      */
     protected function dataDecode(array $data)
     {
+
         return $this->eachData($data, function ($item) {
             return $this->isUtf8 ?$item:Char::gbkToUtf8($item);
         });
