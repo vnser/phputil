@@ -101,6 +101,8 @@ class Curl
         'CURLOPT_HEADER' => TRUE,//是否请求header
     );
 
+    CONST DATATYPE_JSON = 0;
+
     /**
      * 入口方法取得实例对象
      * @param string|array $option
@@ -177,9 +179,13 @@ class Curl
      * @param array|string $data 请求数据
      * @return self
      * */
-    public function data($data)
+    public function data($data,$type = null)
     {
         // $this->curl['orgdata'] = $data;//原始数据
+        if ($type == self::DATATYPE_JSON){
+            $this->option['data'] = json_encode($data);
+            return $this;
+        }
         if (is_array($data)) {
             //数组
             $this->option['data'] = http_build_query($data);//self::joins('=','&',$data);
@@ -306,6 +312,19 @@ class Curl
         return $this->exec();
     }
 
+    /**
+     * 发送json post请求
+     * @param $data
+     * @return false|mixed|string
+     */
+    public function postJson($data)
+    {
+        $this->option['post'] = true;
+        $this->header(['Content-Type'=> 'application/json']);
+        if ($data !== NULL)
+            $this->data($data,self::DATATYPE_JSON);
+        return $this->exec();
+    }
 
     /**
      * 将制定数组链接为指定字符串
