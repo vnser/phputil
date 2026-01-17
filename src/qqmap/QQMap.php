@@ -53,22 +53,22 @@ class QQMap
 
 
     /**
-     * @param array $list
+     * @param array $item
      * @return array
      */
-    static public  function removeMunicipalityCity(array $list): array
+    static public  function removeMunicipalityCity(array $item): array
     {
         $municipalities = ['北京市', '上海市', '天津市', '重庆市'];
 
-        foreach ($list as &$item) {
-            if (isset($item['ad_info']['province'])
-                && in_array($item['ad_info']['province'], $municipalities, true)
-            ) {
-                $item['ad_info']['province'] = str_replace('市', '', $item['ad_info']['province']);
-            }
+
+        if (isset($item['ad_info']['province'])
+            && in_array($item['ad_info']['province'], $municipalities, true)
+        ) {
+            $item['ad_info']['province'] = str_replace('市', '', $item['ad_info']['province']);
         }
 
-        return $list;
+
+        return $item;
     }
 
 }
