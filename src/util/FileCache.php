@@ -76,7 +76,10 @@ class FileCache
     private function checkKeyExpTime($name)
     {
         $key = $this->data;
-        if (!$key['exp_time']){
+        if (!$key){
+            return;
+        }
+        if ($key['exp_time'] === 0){
             return;
         }/*
         if (0 === $key['exp_time']) {
