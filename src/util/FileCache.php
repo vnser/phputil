@@ -77,24 +77,34 @@ class FileCache
     {
         $key = $this->data;
         if (!$key){
-            return;
+            return false;
         }
-        if ($key['exp_time'] === 0){
-            return;
-        }/*
-        if (0 === $key['exp_time']) {
-            return;
-        }*/
-        if ($key['exp_time'] <= time()) {
-            $this->rm($name);
+        if (isset($key['exp_time']) ){
+            if ( $key['exp_time'] === 0){
+                return true;
+            }
+            if ($key['exp_time'] <= time()) {
+                $this->rm($name);
+                return false;
+            }
+            return true;
+        }else{
+            return false;
         }
+
+//        return true;
     }
 
     public function get($name)
     {
         $this->loadData($name);
-        $this->checkKeyExpTime($name);
-        return $this->data['val'];
+        if($this->checkKeyExpTime($name)){
+            return $this->data['val']??null;
+        }else{
+            return null;
+        }
+
+//        return $this->data['val'];
     }
 
     public function rm($name)
