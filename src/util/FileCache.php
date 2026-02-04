@@ -41,7 +41,7 @@ class FileCache
     {
         $cFile = $this->getNameKeyToFName($name);
         if (file_exists($cFile)) {
-            $this->data = json_decode((@file_get_contents($cFile)), true);
+            $this->data = @json_decode((@file_get_contents($cFile)), true)?:null;
         }else{
             $this->data = null;
         }
