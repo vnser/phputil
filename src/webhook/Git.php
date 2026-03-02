@@ -7,7 +7,7 @@ class Git
     const SERVER_EMAIL = 'server@example.com';
 
     //webhook脚本
-    static public function pushEventPull($username, $password, $repository, $pullbranch,$home)
+    static public function pushEventPull($username, $password, $repository, $pullbranch,$cwd)
     {
         /*  $username = \think\Env::get('webhook.username');
           $password = \think\Env::get('webhook.password');
@@ -17,10 +17,10 @@ class Git
         $repository = "{$a['scheme']}://{$username}:{$password}@{$a['host']}" . (isset($a['port']) ? ":{$a['port']}" : '') . $a['path'];
         $env = array_merge($_ENV, [
             'GIT_TERMINAL_PROMPT' => 0,
-            'HOME' => $home
+            'HOME' => sys_get_temp_dir()
         ]);
-        print_r(self::runCommand('git config --global user.email "' . self::SERVER_EMAIL . '" && git config --global user.name "' . self::SERVER_NAME . '"', [], null, $env));
-        print_r(self::runCommand('git pull ' . $repository . " {$pullbranch}", [], null, $env));
+        print_r(self::runCommand('git config --global user.email "' . self::SERVER_EMAIL . '" && git config --global user.name "' . self::SERVER_NAME . '"', [], $cwd, $env));
+        print_r(self::runCommand('git pull ' . $repository . " {$pullbranch}", [], $cwd, $env));
     }
 
     static private function runCommand(string $command, array $descriptors = [], string $cwd = null, array $env = null): array
