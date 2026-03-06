@@ -21,6 +21,7 @@ class Git
         ]);
         print_r(self::runCommand('git config --global user.email "' . self::SERVER_EMAIL . '" && git config --global user.name "' . self::SERVER_NAME . '"', [], $cwd, $env));
         print_r(self::runCommand('git pull ' . $repository . " {$pullbranch}", [], $cwd, $env));
+        print_r(self::runCommand('git  fetch --tags ' . $repository . " {$pullbranch}", [], $cwd, $env));
     }
 
     static private function runCommand(string $command, array $descriptors = [], string $cwd = null, array $env = null): array
